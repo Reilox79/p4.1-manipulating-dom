@@ -38,6 +38,25 @@ function renderCards(jsondata) {
     newCard.querySelector(".card-title").textContent = char.name;
     newCard.querySelector(".card-text").textContent = char.description;
 
+    /**
+     * the ids of the template are the same in every card, so we add the id of the hero
+     * to the panels and to the buttons that control them
+     */
+    for (let panel of newCard.querySelectorAll(".accordion-collapse")) {
+      panel.id = panel.id + "_" + char.id;
+    }
+
+    for (let button of newCard.querySelectorAll(".accordion-button")) {
+      button.setAttribute(
+        "data-bs-target",
+        button.getAttribute("data-bs-target") + "_" + char.id
+      );
+      button.setAttribute(
+        "aria-controls",
+        button.getAttribute("aria-controls") + "_" + char.id
+      );
+    }
+
     heroesRow.append(newCard);
   }
 }
