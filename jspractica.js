@@ -23,27 +23,21 @@ fetch("./data/heroes.json")
 // the place where we are going to insert the cards
 const heroesRow = document.getElementById("heroes");
 
+// we use this as a template to replicate
+const cardTemplate = document.getElementById("card-template").content;
+
 function renderCards(jsondata) {
   for (let char of jsondata.data.results) {
-    // column
-    const col = document.createElement("div");
-    col.classList.add("col-sm-6", "col-md-4", "col-xl-3", "d-flex", "mt-3");
+    // copy of the template, with all its children
+    let newCard = cardTemplate.cloneNode(true);
 
-    // card
-    const card = document.createElement("div");
-    card.classList.add("card", "flex-fill");
+    const img = newCard.querySelector(".card-img-top");
+    img.src = char.thumbnail.path + "." + char.thumbnail.extension;
+    img.alt = char.name;
 
-    // card body with the name
-    const cardBody = document.createElement("div");
-    cardBody.classList.add("card-body");
+    newCard.querySelector(".card-title").textContent = char.name;
+    newCard.querySelector(".card-text").textContent = char.description;
 
-    const title = document.createElement("h4");
-    title.classList.add("card-title");
-    title.textContent = char.name;
-
-    cardBody.append(title);
-    card.append(cardBody);
-    col.append(card);
-    heroesRow.append(col);
+    heroesRow.append(newCard);
   }
 }
