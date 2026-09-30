@@ -38,6 +38,13 @@ function renderCards(jsondata) {
     newCard.querySelector(".card-title").textContent = char.name;
     newCard.querySelector(".card-text").textContent = char.description;
 
+    // the 4 panels of the accordion: comics, series, stories and events
+    const bodies = newCard.querySelectorAll(".accordion-body");
+    fillList(bodies[0], char.comics.items);
+    fillList(bodies[1], char.series.items);
+    fillList(bodies[2], char.stories.items);
+    fillList(bodies[3], char.events.items);
+
     /**
      * the ids of the template are the same in every card, so we add the id of the hero
      * to the panels and to the buttons that control them
@@ -59,4 +66,17 @@ function renderCards(jsondata) {
 
     heroesRow.append(newCard);
   }
+}
+
+// creates a list with one <li> for each item and puts it inside the container
+function fillList(container, items) {
+  const ul = document.createElement("ul");
+
+  for (let item of items) {
+    const li = document.createElement("li");
+    li.textContent = item.name;
+    ul.append(li);
+  }
+
+  container.append(ul);
 }
