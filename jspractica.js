@@ -31,7 +31,9 @@ function renderCards(jsondata) {
     // copy of the template, with all its children
     let newCard = cardTemplate.cloneNode(true);
 
+
     const img = newCard.querySelector(".card-img-top");
+    //The image is divided in 2 pieces
     img.src = char.thumbnail.path + "." + char.thumbnail.extension;
     img.alt = char.name;
 
