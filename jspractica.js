@@ -22,5 +22,6 @@ fetch("./data/heroes.json")
 
 function renderCards(jsondata) {
   for (let char of jsondata.data.results) {
+    console.log(char.name);
   }
 }
